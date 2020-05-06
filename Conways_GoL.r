@@ -27,7 +27,7 @@ next_step <- function(a,nbr){
   b <- matrix(0,n,n)
   b[a[2:(n+1),2:(n+1)]==1 & (nbr ==2 | nbr == 3)] =1
   b[a[2:(n+1),2:(n+1)]==0 & ( nbr == 3)] =1
-  a[2:(n+1),2:(n+1)]<-b
+  a[2:(n+1),2:(n+1)]=b
   a<- extra_cell(n,a)
   a
 }
@@ -38,8 +38,8 @@ plot_mat <- function(a){
 }
 game <- function(a,n) {
   setwd("~/Documents/Rfiles/T_09/images")
+  a<-extra_cell(n,a)
   for (i in 1:30){
-    a<-extra_cell(n,a)
     nbr<-neighbours(a)
     a<-next_step(a,nbr)
     name <- paste0("plot",i,".png")
@@ -47,7 +47,6 @@ game <- function(a,n) {
     plot_mat(a)
     Sys.sleep(0.1)
     dev.off()
-    
   }
 }
 game(a,n)
